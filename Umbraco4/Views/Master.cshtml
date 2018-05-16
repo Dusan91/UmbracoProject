@@ -1,0 +1,206 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Umbraco.Core
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    // Get basic design settings from the homepage
+    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
+    var font = Umbraco.GetPreValueAsString(home.Font);
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>@Model.Content.Name - @home.Sitename</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="@Url.Content("~/css/umbraco-starterkit-style.css")" />
+    @*<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">*@
+
+    <!-- Custom fonts for this template -->
+    @*<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*@
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+   @* <link href="css/clean-blog.min.css" rel="stylesheet">*@
+    <!-- CSS here -->
+        @*<link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/meanmenu.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">*@
+        
+        <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/owl.carousel.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/magnific-popup.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/fontawesome-all.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/material-design-iconic-font.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/themify-icons.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/animate.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/meanmenu.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/default.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+        <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")">
+    @RenderSection("Header", required: false)
+</head>
+
+<body  class="frontpage theme-font-@font theme-color-@colorTheme">
+
+    <div class="mobile-nav">
+        <nav class="nav-bar">
+            @Html.Partial("~/views/partials/navigation/topNavigation2.cshtml")
+        </nav>
+    </div>
+
+    <header class="header-menu">
+			<!-- header-to-area-start -->
+			<div id="header-sticky" class="main-menu-area">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xl-3 col-lg-2 col-md-2 col-sm-2">
+							<div class="logo">
+							@if (home.SiteLogo != null && !string.IsNullOrEmpty(home.SiteLogo.Url))
+							{
+								<div class="nav-link--home">
+									<img  class="logo-image" src="@home.SiteLogo.Url" alt="@home.Sitename">
+								</div>
+							}
+							else
+							{
+								<a class="nav-link nav-link--home nav-link--home__text logo-text" href="/">@home.Sitename</a>
+							}
+							</div>
+						</div>
+						<div class="col-xl-9 col-lg-10 col-md-10 col-sm-10">
+							
+							<div class="main-menu text-right" style="margin-top: 50px;">
+							
+								<nav>
+								    @Html.Partial("~/Views/Partials/Navigation/TopNavigation2.cshtml")
+
+								</nav>
+							</div>
+						</div>
+					</div>
+					<div class="col-12"><div class="mobile-menu"></div></div>
+				</div>
+			</div>
+			<!-- header-to-area-end -->
+		</header>
+
+
+    <main style="margin: 0 10%;">
+        @RenderBody()
+    </main>
+    <footer class="section" style="border-top:1px solid #ddd;    padding: 5px 0px 0px 10% !important;">
+    <style>
+    .unorderListfooter{
+        text-align: left;
+        font-size: 13px;
+        border-left: 1px solid darkblue;
+    }
+    .boxic{
+        border-left: 1px solid darkblue;
+        height: 113px;
+    }
+    .listFooter{list-style:none !important}</style>
+    <div class="container">
+        <div class="row">
+
+            <div class="ta-center col-md-12">
+                
+                @*<div class="col-md-12 ta-center">
+                    @home.FooterAddress
+                </div>*@
+                <div class="col-md-2" >
+                    <ul class="unorderListfooter">
+                        <li class="listFooter"><a href="/">Početna</a></li>
+                        <li class="listFooter"><a href="/o-nama/">O nama</a></li>
+                        <li class="listFooter"><a href="/proizvodi/">Proizvodi</a></li>
+                        <li class="listFooter"><a href="/rešenja/">Rešenja</a></li>
+                        <li class="listFooter"><a href="/vesti/">Vesti</a></li>
+                        <li class="listFooter"><a href="/novosti/">Novosti NAV</a></li>
+                        <li class="listFooter"><a href="/odabrani-projekti/">Odabrani projekti</a></li>
+                        <li class="listFooter"><a href="/korisni-materijali/">Korisni materijali</a></li>
+                        <li class="listFooter"><a href="/kontakt/">Kontakt </a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="unorderListfooter">
+                        <li class="listFooter"><a href="/proizvodi/microsoft-dynamics-nav/">Microsoft Dynamics NAV</a></li>
+                        <li class="listFooter"><a href="/proizvodi/microsoft-dynamics-crm/">Microsoft Dynamics CRM</a></li>
+                        <li class="listFooter"><a href="/proizvodi/power-bi/">Power BI</a></li>
+                        <li class="listFooter"><a href="/proizvodi/b2b-portal/">B2B Portal</a></li>
+                        @*<div class="logos"><div class="logo-holder"><img src="cms_upload/pages/files/2_microsoft-logo.png"></div></div>     *@
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="unorderListfooter">
+                        <li class="listFooter"><a href="/rešenja/građevina/">Građevina</a></li>
+                        <li class="listFooter"><a href="/rešenja/transport/">Transport </a></li>
+                        <li class="listFooter"><a href="/rešenja/voćarstvo/">Voćarstvo</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="unorderListfooter">
+                        <li  class="listFooter"><a href="#">Korisnička podrška</a></li>
+                        <!--<li><a href="ticket.php?pID=65">Novi zahtev</a></li>-->
+                        <!--<li><a href="ticket.php?pID=85">Pregled zahteva</a></li>-->
+                        <!--<li><a class="enhanceMe" href="registrator.php">Moj nalog</a></li>-->
+                        <li class="listFooter"><a class="enhanceMe" href="#">Prijava na mail listu</a></li>
+                        <li class="mHide listFooter"><a href="#">Navion podrška</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <div class="boxic">
+                        <div class="navion-link">
+                            <a href="/media/1061/40_navion-flyer.pdf" target="_blank"><img  style="width:50px !important" src="/media/1059/40_navion-pdf.png"></a>
+                        </div>
+                        <h4><a href="/media/1061/40_navion-flyer.pdf" style="font-size:11px" target="_blank">Navion Flyer</a></h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="boxic" >
+                        <div class="navion-link">
+                            <a href="https://www.linkedin.com/company/10335816" target="_blank"><img style="width:50px !important" src="/media/1058/40_linkedin-icon.png"></a>
+                        </div>
+                        <h4><a href="https://www.linkedin.com/company/10335816" style="font-size:11px" target="_blank">LinkedIn</a></h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5"></div>
+                <div class="col-md-2"><a class="continueBtn styleA" href="#top">Vrh</a></div>
+                <div class="col-md-5"></div>
+            </div>
+
+        </div>
+    </div>
+
+    </footer>
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    <script src="@Url.Content("~/scripts/umbraco-starterkit-app.js")"></script>
+
+</body>
+
+</html>

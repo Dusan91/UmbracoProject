@@ -1,0 +1,37 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Umbraco.Web;
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{ 
+    var startNodeId = Model.MacroParameters["startNodeId"] != null ? Model.MacroParameters["startNodeId"] : Model.Content.Id;
+    var numberOfPosts = 3;
+    if (Model.MacroParameters["numberOfPosts"] != null)
+    {
+        int.TryParse((string)Model.MacroParameters["numberOfPosts"], out numberOfPosts);
+    }
+ }
+ <style>a{padding: 0 !important;margin: 0 !important}</style>
+
+@if (startNodeId != null)
+{
+    @* Get the starting page *@
+    var startNode = Umbraco.TypedContent(startNodeId);
+    var blogposts = startNode.Children.OrderByDescending(x => x.CreateDate).Take(numberOfPosts);
+
+    if (blogposts.Any())
+    {
+        <div class="blogposts" style="
+        padding: 0;
+        margin-top: -30px;
+        padding-top: 50px;
+        padding-left: 40%;
+        ">
+
+            @foreach (ContentModels.Blogpost post in blogposts)
+            {
+                <a style="padding: 0;padding-left: 3px  !important;margin: 0;" href="@post.Url" class="blogpost">
+                    <p class="macroP" style="padding: 0 !important;margin: 0 !important;" >@post.PageTitle</p>
+                </a>
+            }
+        </div>
+    }
+}

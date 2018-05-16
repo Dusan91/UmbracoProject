@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Blogpost>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "Master.cshtml";
+}
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+<style>
+    p{color:black;margin-bottom: 10px !important;}
+    li{list-style-type: initial;margin-left: 3%;}
+    .macroP{color: darkblue;}
+    .section{padding:0px !important}
+    .no-air{color:white}
+    .h3Style{text-align:center}
+</style>
+<section class="section">
+    <div class="container">
+        
+        <div class="blogpost-meta">
+            <span class="blogpost-cat">
+                @Html.Partial("~/Views/Partials/CategoryLinks.cshtml", Model.Content.Categories)
+            </span>
+        </div>
+        @*<h3>@Model.Content.Excerpt</h3>*@
+        <h3 class="h3Style">@Model.Content.PageTitle</h3>
+        @Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+        <small style="float: right;" class="blogpost-date">@Model.Content.CreateDate.ToShortDateString()</small>
+
+        <!-- todo: implement discus comments -->
+    
+    </div>
+    
+</section>

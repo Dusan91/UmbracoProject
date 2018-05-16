@@ -1,0 +1,91 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "Master.cshtml";
+    var backgroundImage = Model.Content.HeroBackgroundImage != null ? Model.Content.HeroBackgroundImage.Url : String.Empty;
+}
+<style>
+    .imgHead{
+        width: 100%;
+        margin-left: 100px;
+        margin-top: -80px;
+        height: 300px;
+    }
+    .img{width: 100%;height: 250px;}
+    .top_baner{margin-top: -7%;}
+    .shadow{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset 0 0 20px 7px #ffffff;
+        top: 0;
+        left: 0;
+        display: block !important; 
+    }
+</style>
+<section class="section  section--content-center section--thick-border">
+
+</section>
+@**********************************
+<img class="imgHead" src="/media/1031/13_microsoft-dynamics-nav.jpg">
+**********************************@
+<div class="top_baner ">
+    <div id="jssor1_container" >
+        <!--#region Bullet Navigator Skin Begin --> <!-- Help: http://www.jssor.com/development/slider-with-bullet-navigator-jquery.html --> <!-- bullet navigator container --> <!--#endregion Bullet Navigator Skin End --> <!--#region Arrow Navigator Skin Begin --> <!-- Arrow Left --> <!-- Arrow Right -->
+        <div style=" transform-origin: 0px 0px 0px; transform: scale(1);">
+            <div class="" style="display: block; overflow: visible;">
+                <div style=" overflow: hidden;z-index: 0;">
+                    <div style=" z-index: 0;"></div>
+                </div>
+                <div style="overflow: hidden; z-index: 0;">
+                    <div style="background-color: #000000; opacity: 0; display: none;"></div>
+                    <div class="mySlides w3-animate-left " style= "overflow: hidden; display: block;">
+                        <img style="" class="img" src="/media/1031/13_microsoft-dynamics-nav.jpg" border="0" alt="">
+                        <div class="shadow" style=" z-index: 1000; display: none;"></div>
+                    </div>
+                    <div class="mySlides w3-animate-left " style=" overflow: hidden; display: none;">
+                        <img style="" class="img" src="/media/1043/9_microsoft-dynamics-crm.jpg" border="0" alt="">
+                        <div class="shadow" style=" z-index: 1000; display: none;"></div>
+                    </div>
+                    <div class="mySlides w3-animate-left " style=" overflow: hidden; display: none;">
+                        <img style="" class="img" src="/media/1045/16_power-bi.png" border="0" alt="">
+                        <div class="shadow" style=" z-index: 1000; display: none;"></div>
+                    </div>
+                    <div class="mySlides w3-animate-left " style=" overflow: hidden; display: none;">
+                        <img style="" class="img" src="/media/1044/15_b2b-portal.jpg" border="0" alt="">
+                        <div class="shadow" style=" z-index: 1000; display: none;"></div>
+                    </div>
+                </div>
+                <div class="jssorb2" style="">
+                    <!-- bullet navigator item prototype -->
+                    <div class="" style="position: absolute; left: 0px; top: 0px;"></div>
+                    <div class="" style="position: absolute; left: 20px; top: 0px;"></div>
+                    <div class="av" style="position: absolute; left: 40px; top: 0px;"></div>
+                    <div class="" style="position: absolute; left: 60px; top: 0px;"></div>
+                </div>
+                <span class="jssora20l" style="top: 52.5px; display: none;" data-u="arrowleft"></span> <span class="jssora20r" style="top: 52.5px; display: none;" data-u="arrowright"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section section">
+    @Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+</section>
+<script>
+    var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 4000); // Change image every 2 seconds
+}
+</script>
+

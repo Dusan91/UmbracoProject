@@ -1,0 +1,49 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Umbraco.Web;
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{ 
+    var startNodeId = Model.MacroParameters["startNodeId"] != null ? Model.MacroParameters["startNodeId"] : Model.Content.Id;
+    var numberOfPosts = 3;
+    if (Model.MacroParameters["numberOfPosts"] != null)
+    {
+        int.TryParse((string)Model.MacroParameters["numberOfPosts"], out numberOfPosts);
+    }
+ }
+ <style>
+    .styleH3{height: 70px !important;}
+    .divHeight{height:220px}
+    .styleP{color:black}
+</style>
+@if (startNodeId != null)
+{
+    @* Get the starting page *@
+    var startNode = Umbraco.TypedContent(startNodeId);
+    var blogposts = startNode.Children.OrderByDescending(x => x.CreateDate).Take(numberOfPosts);
+
+    if (blogposts.Any())
+    {
+        <div class="blogposts">
+
+            @foreach (ContentModels.Blogpost post in blogposts)
+            {
+              
+                <div class="blog-wrapper mb-60">
+							@*
+							<div class="blog-img">
+								<a href="blog-details.html"><img src="img/blog/1.jpg" alt="" /></a>
+					        </div>
+					        *@
+						<div class="blog-text">
+						    <div class="divHeight">
+								<h3 class="styleH3"><a href="@post.Url">@post.PageTitle</a></h3>
+                               @* <div class="blogpost-excerpt">@post.Excerpt</div>*@
+								<span>@post.CreateDate.ToString("dd MMM")</span>
+								<p class="styleP">@post.Excerpt</p>
+							</div>
+								<a class="continueBtn styleA" href="@post.Url">Continue Reading</a>
+							</div>
+						</div>
+            }
+        </div>
+    }
+}

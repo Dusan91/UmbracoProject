@@ -1,0 +1,57 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Blog>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "Master.cshtml";
+}
+<style>
+    .section{padding:0px !important}
+    .no-air{color:white}
+    p{color:darkblue}
+    .continueBtn{
+        width: 150px;
+        height: 40px;
+        text-align: center;
+        padding-top: 15px !important;
+
+    }
+</style>
+
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+<section class="section">
+
+    <div class="container">
+<div class="col-md-4" >
+    @Umbraco.RenderMacro("onlyHeadings",
+                     new
+                     {
+                         numberOfPosts = Model.Content.HowManyPostsShouldBeShown,
+                         startNodeId = Model.Content.Id
+                     })
+</div>
+<div class="col-md-8 ">
+    
+			 @Umbraco.RenderMacro("LatestBlogpost2",
+                     new
+                     {
+                         numberOfPosts = Model.Content.HowManyPostsShouldBeShown,
+                         startNodeId = Model.Content.Id
+                     })
+		
+</div>
+        
+        <!-- todo: implement paging -->
+        <!--
+        <nav class="nav-bar nav-bar--center">
+            <a class="nav-link nav-link--black" href="">Prev</a>
+            <a class="nav-link nav-link--black nav-link--active" href="">P1</a>
+            <a class="nav-link nav-link--black" href="">P2</a>
+            <a class="nav-link nav-link--black" href="">P3</a>
+            <a class="nav-link nav-link--black" href="">P4</a>
+            <a class="nav-link nav-link--black" href="">P5</a>
+            <a class="nav-link nav-link--black" href="">Next</a>
+        </nav>
+        -->
+    </div>
+
+</section>

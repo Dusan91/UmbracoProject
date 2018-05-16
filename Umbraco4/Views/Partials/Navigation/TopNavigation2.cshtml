@@ -1,0 +1,21 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web;
+@{ 
+    var site = Model.Content.Site();
+    var selection = site.Children.Where(x => x.IsVisible());
+}
+<!-- uncomment this line if you don't want it to appear in the top navigation -->
+
+     
+		<ul>
+		    <li class="nav-item" style="width: auto !important;padding-right: 13px !important;">
+                <a class="nav-link" href="/" style="width: auto !important;margin: 0 !important;padding: 0 !important;">Početna</a>
+            </li>
+            @foreach (var item in selection)
+            {     
+                
+                <li class="nav-item" style="padding:0px !important;margin:0px !important;width: auto !important;padding-right: 13px !important;border-left:1px solid darkblue !important">
+                <a class="nav-link @(item.IsAncestorOrSelf(Model.Content) ? "nav-link--active" : null)" href="@(item.Name=="O Nama" ? "/o-nama/o-nama/" : item.Url)" style="width: auto;margin: 0;padding: 0;padding-left: 5px !important;">@item.Name</a>
+                </li>
+            }
+        </ul>
